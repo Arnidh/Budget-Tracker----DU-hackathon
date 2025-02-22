@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Budgeting for All - Dashboard</title>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Your Dashboard</h1>
+        <button id="logout">Logout</button>
+    </header>
+    <main>
+        <section id="expense-form">
+            <h2>Add Expense</h2>
+            <input type="number" id="amount" placeholder="Amount" required />
+            <input type="text" id="category" placeholder="Category" required />
+            <input type="date" id="date" required />
+            <button id="add-expense">Add Expense</button>
+        </section>
+
+        <section id="expenses-list">
+            <h2>Your Expenses</h2>
+            <ul id="expenses"></ul>
+        </section>
+
+        <section id="budget-section">
+            <h2>Set Monthly Budget</h2>
+            <input type="number" id="monthly-budget" placeholder="Monthly Budget" />
+            <button id="set-budget">Set Budget</button>
+            <div id="budget-alerts"></div>
+        </section>
+
+        <!-- Chart Section -->
+        <canvas id="spending-chart"></canvas>
+
+    </main>
+
+    <!-- Scripts -->
+    <script src="firebase.js"></script>
+    <script src="auth.js"></script>
+    <script src="charts.js"></script>
+    <script src="js/dashboard.js"></script>
+
+</body>
+</html>

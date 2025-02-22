@@ -1,0 +1,93 @@
+<!-- frontend/public/register.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Budgeting for All - Register</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/8.10.1/firebase-app.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/8.10.1/firebase-auth.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/8.10.1/firebase-firestore.min.js"></script>
+</head>
+<body class="auth-page">
+  <div class="auth-container">
+    <div class="auth-card">
+      <div class="auth-header">
+        <div class="logo">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18 3C9.716 3 3 9.716 3 18C3 26.284 9.716 33 18 33C26.284 33 33 26.284 33 18C33 9.716 26.284 3 18 3ZM24.75 19.5H19.5V24.75C19.5 25.579 18.829 26.25 18 26.25C17.171 26.25 16.5 25.579 16.5 24.75V19.5H11.25C10.421 19.5 9.75 18.829 9.75 18C9.75 17.171 10.421 16.5 11.25 16.5H16.5V11.25C16.5 10.421 17.171 9.75 18 9.75C18.829 9.75 19.5 10.421 19.5 11.25V16.5H24.75C25.579 16.5 26.25 17.171 26.25 18C26.25 18.829 25.579 19.5 24.75 19.5Z" fill="#4F46E5"/>
+          </svg>
+          <h1>Budgeting for All</h1>
+        </div>
+        <h2>Create Account</h2>
+        <p>Start your journey to financial freedom</p>
+      </div>
+
+      <form id="register-form" class="auth-form">
+        <div class="alert error" id="register-error" style="display: none;"></div>
+        
+        <div class="form-group">
+          <label for="register-email">Email</label>
+          <input type="email" id="register-email" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="register-password">Password</label>
+          <input type="password" id="register-password" required minlength="6" placeholder="At least 6 characters">
+        </div>
+        
+        <div class="form-group">
+          <label for="register-confirm-password">Confirm Password</label>
+          <input type="password" id="register-confirm-password" required minlength="6">
+        </div>
+        
+        <button type="submit" class="primary-btn full-width">Create Account</button>
+        
+        <div class="divider">
+          <span>or</span>
+        </div>
+        
+        <button type="button" id="google-sign-up" class="google-btn">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google logo">
+          Sign up with Google
+        </button>
+      </form>
+      
+      <div class="auth-footer">
+        <p>Already have an account? <a href="login.html">Sign In</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="firebase.js"></script>
+  <script src="auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Register form submission
+      document.getElementById('register-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = document.getElementById('register-email').value;
+        const password = document.getElementById('register-password').value;
+        const confirmPassword = document.getElementById('register-confirm-password').value;
+        
+        // Check if passwords match
+        if (password !== confirmPassword) {
+          const errorMessage = document.getElementById('register-error');
+          errorMessage.textContent = "Passwords don't match";
+          errorMessage.style.display = 'block';
+          return;
+        }
+        
+        register(email, password);
+      });
+      
+      // Google sign-up
+      document.getElementById('google-sign-up').addEventListener('click', () => {
+        signInWithGoogle();
+      });
+    });
+  </script>
+</body>
+</html>
